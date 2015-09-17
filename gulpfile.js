@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-    nomdemon = require('gulp-nodemon');
+    nodemon = require('gulp-nodemon');
 
 gulp.task('default',function(){
     nodemon({
@@ -12,5 +12,5 @@ gulp.task('default',function(){
     })
     .on('restart',function(){
         console.log('Restarting');
-    })
-})
+    });
+});
