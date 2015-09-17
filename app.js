@@ -1,23 +1,34 @@
 var express = require('express'),
     mongoose = require('mongoose');
 
-var db = mongoose.connect('mongodb://192.168.88.103:27017/bookApi');
+var Schema = mongoose.Schema;
+var db = mongoose.connect('mongodb://127.0.0.1:27017/bookApi');
 
 var Book = require('./models/bookModel');
 var app = express();
 
 var port = process.env.PORT || 3000;
 
-
 var bookRouter = express.Router();
 
 bookRouter.route('/books')
     .get(function(req,res){
-        Book.find(function(err,books){
-            if(err)
+        Book.find({},function(err,books){
+            console.log("aki");
+            if(err) 
                 res.status(500).send(err);
             else
-                res.json(books)
+                res.json(books);
+        });
+});
+
+bookRouter.route('/books')
+    .post(function(req,res){
+        Book.create(req.body,function(err,books){
+            if(err) 
+                res.status(500).send(err);
+            else
+                res.json(books);
         });
 });
 
